@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="CawbirdXWindow" parent="AdwApplicationWindow">
+    <child>
+      <object class="AdwHeaderBar" id="header_bar">
+        <property name="show-end-title-buttons">True</property>
+        <property name="decoration-layout">:close,minimize,maximize</property>
+      </object>
+    </child>
+  </template>
+</interface>
