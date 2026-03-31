@@ -382,12 +382,16 @@ mod app_imp {
     impl ApplicationImpl for CawbirdXApp {
         fn activate(&self) {
             // Ensure we have a window
-            let window = if let Some(window) = self.window.borrow().as_ref() {
-                window.clone()
-            } else {
-                let window = CawbirdXWindow::new();
-                self.window.borrow_mut().replace(window.clone());
-                window
+            let window = {
+                let window_ref = self.window.borrow();
+                if let Some(window) = window_ref.as_ref() {
+                    window.clone()
+                } else {
+                    drop(window_ref);
+                    let window = CawbirdXWindow::new();
+                    self.window.borrow_mut().replace(window.clone());
+                    window
+                }
             };
 
             // Present window
