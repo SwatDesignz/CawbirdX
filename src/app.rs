@@ -113,11 +113,18 @@ impl CawbirdXWindow {
             .tooltip_text("Search")
             .build();
 
+        let settings_btn = gtk4::Button::builder()
+            .icon_name("preferences-system-symbolic")
+            .tooltip_text("Settings")
+            .build();
+
         toolbar.append(&refresh_btn);
         toolbar.append(&compose_btn);
         toolbar.append(&gtk4::Separator::new(gtk4::Orientation::Vertical));
         toolbar.append(&search_entry);
         toolbar.append(&search_btn);
+        toolbar.append(&gtk4::Separator::new(gtk4::Orientation::Vertical));
+        toolbar.append(&settings_btn);
 
         // Create timeline
         let timeline = TimelineWidget::new();
@@ -148,6 +155,10 @@ impl CawbirdXWindow {
                     let _ = window.search_tweets(&query).await;
                 }));
             }
+        }));
+
+        settings_btn.connect_clicked(clone!(@weak self as window => move |_| {
+            window.show_settings_dialog();
         }));
 
         // Initialize on first show
@@ -354,6 +365,56 @@ impl CawbirdXWindow {
         self.refresh_timeline().await?;
 
         Ok(())
+    }
+
+    fn show_settings_dialog(&self) {
+        let dialog = gtk4::MessageDialog::builder()
+            .message_type(gtk4::MessageType::Question)
+            .buttons(gtk4::ButtonsType::OkCancel)
+            .text("Settings")
+            .modal(true)
+            .transient_for(self)
+            .build();
+
+        let content = gtk4::Box::builder()
+            .orientation(gtk4::Orientation::Vertical)
+            .spacing(12)
+            .margin_top(12)
+            .margin_bottom(12)
+            .margin_start(12)
+            .margin_end(12)
+            .build();
+
+        // Clear credentials button
+        let clear_btn = gtk4::Button::builder()
+            .label("Clear Credentials")
+            .css_classes(vec!["destructive-action".to_string()])
+            .build();
+
+        let info_label = gtk4::Label::builder()
+            .label("CawbirdX v0.1.0\n\nYour credentials are stored securely in your system keyring.")
+            .halign(gtk4::Align::Start)
+            .build();
+
+        content.append(&info_label);
+        content.append(&clear_btn);
+
+        dialog.content_area().append(&content);
+
+        clear_btn.connect_clicked(clone!(@weak dialog as dlg => move |_| {
+            if let Err(e) = CredentialStore::clear_credentials() {
+                eprintln!("Failed to clear credentials: {}", e);
+            }
+            dlg.close();
+        }));
+
+        dialog.connect_response(clone!(@weak dialog as dlg => move |_, response| {
+            if response == gtk4::ResponseType::Ok {
+                dlg.close();
+            }
+        }));
+
+        dialog.show();
     }
 }
 

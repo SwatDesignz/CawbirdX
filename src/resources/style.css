@@ -1,0 +1,98 @@
+/* CawbirdX CSS Styles */
+
+/* Window */
+window {
+    background-color: @window_bg_color;
+}
+
+/* Title */
+.title-label {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Timeline */
+.timeline-list {
+    background-color: @view_bg_color;
+}
+
+/* Tweet Widget */
+.tweet-widget {
+    background-color: @card_bg_color;
+    border-radius: 8px;
+    margin: 4px;
+    padding: 8px;
+}
+
+.tweet-widget:hover {
+    background-color: shade(@card_bg_color, 0.95);
+}
+
+/* Avatar */
+.avatar {
+    border-radius: 50%;
+}
+
+/* Labels */
+.name-label {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.username-label {
+    font-size: 12px;
+    color: @dim_label_color;
+}
+
+.timestamp-label {
+    font-size: 11px;
+    color: @dim_label_color;
+}
+
+.content-label {
+    font-size: 14px;
+}
+
+/* Action Buttons */
+.action-btn {
+    padding: 4px 8px;
+}
+
+.action-btn:hover {
+    background-color: shade(@theme_bg_color, 0.9);
+}
+
+/* Character Count */
+.char-count {
+    font-size: 11px;
+    color: @dim_label_color;
+}
+
+/* Profile Widget */
+.user-profile-widget {
+    background-color: @card_bg_color;
+    border-radius: 12px;
+    padding: 16px;
+}
+
+.profile-avatar {
+    border-radius: 50%;
+}
+
+.profile-name {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.profile-username {
+    font-size: 14px;
+    color: @dim_label_color;
+}
+
+.profile-stat {
+    font-size: 14px;
+}
+
+.verified-badge {
+    opacity: 0.8;
+}
