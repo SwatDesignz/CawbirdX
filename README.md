@@ -116,7 +116,7 @@ CawbirdX uses the RapidAPI Twitter API. You'll need to:
 3. Get your API Key and Host
 
 On first run, you'll be prompted to enter:
-- **API Key**: Your RapidAPI key (e.g., `40eeaf9309msh2b63ac4baa2829fp1054a3jsn9f30bc67e816`)
+- **API Key**: Your RapidAPI key (e.g., `RapidAPI key`)
 - **API Host**: The RapidAPI host (e.g., `twitter241.p.rapidapi.com`)
 
 Credentials are stored securely in your system keyring.
