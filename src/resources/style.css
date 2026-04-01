@@ -11,6 +11,11 @@ window {
     font-weight: bold;
 }
 
+/* Logo */
+.title-logo {
+    margin-right: 8px;
+}
+
 /* Timeline */
 .timeline-list {
     background-color: @view_bg_color;

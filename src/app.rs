@@ -72,11 +72,26 @@ impl CawbirdXWindow {
         self.set_default_size(1024, 768);
 
         // Setup header bar
+        let logo = gtk4::Image::builder()
+            .resource("/com/github/cawbirdx/icons/cawbirdx.svg")
+            .width_request(24)
+            .height_request(24)
+            .css_classes(vec!["title-logo".to_string()])
+            .build();
+
         let title_label = gtk4::Label::builder()
             .label("CawbirdX")
             .css_classes(vec!["title-label".to_string()])
             .build();
-        self.imp().header_bar.set_title_widget(Some(&title_label));
+
+        let title_box = gtk4::Box::builder()
+            .orientation(gtk4::Orientation::Horizontal)
+            .spacing(8)
+            .build();
+        title_box.append(&logo);
+        title_box.append(&title_label);
+
+        self.imp().header_bar.set_title_widget(Some(&title_box));
 
         // Create main content box
         let content = gtk4::Box::builder()

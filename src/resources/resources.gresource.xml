@@ -3,5 +3,6 @@
   <gresource prefix="/com/github/cawbirdx">
     <file>window.ui</file>
     <file>style.css</file>
+    <file>icons/cawbirdx.svg</file>
   </gresource>
 </gresources>

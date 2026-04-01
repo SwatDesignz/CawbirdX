@@ -25,6 +25,10 @@ fn main() -> gtk4::glib::ExitCode {
         gtk4::STYLE_PROVIDER_PRIORITY_APPLICATION,
     );
 
+    // Set application icon
+    gtk4::IconTheme::for_display(&gtk4::gdk::Display::default().expect("Failed to get display"))
+        .add_resource_path("/com/github/cawbirdx/icons");
+
     // Create a new application
     let app = app::CawbirdXApp::default();
     app.upcast::<gtk4::Application>().run()
